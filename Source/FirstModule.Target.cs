@@ -1,15 +1,19 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+//----------------------------------------------------------------------------------------------------
+// FirstModule.Target.cs
+//----------------------------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------------------------
 
 using UnrealBuildTool;
-using System.Collections.Generic;
 
+//----------------------------------------------------------------------------------------------------
 public class FirstModuleTarget : TargetRules
 {
 	public FirstModuleTarget(TargetInfo Target) : base(Target)
 	{
-		Type = TargetType.Game;
+		Type                 = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V5;
-		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_6;
+		IncludeOrderVersion  = EngineIncludeOrderVersion.Unreal5_6;
 		ExtraModuleNames.Add("FirstModule");
 		RegisterModulesCreatedByRider();
 	}

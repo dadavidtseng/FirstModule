@@ -1,16 +1,20 @@
 ﻿//----------------------------------------------------------------------------------------------------
-// ManualCppOnly.h
+// AutoExposed.cpp
 //----------------------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------------------
-#pragma once
+#include "AutoExposed.h"
 
-#include <CoreMinimal.h>
+#include "AutoModule.h"
 
 //----------------------------------------------------------------------------------------------------
-class MANUAL_API FManualCppOnly
+AAutoExposed::AAutoExposed()
 {
-public:
-	FManualCppOnly();
-	void DoManualCppOnly();
-};
+	UE_LOG(LogAuto, Warning, TEXT("AAutoExposed::AAutoExposed()"));
+}
+
+//----------------------------------------------------------------------------------------------------
+void AAutoExposed::DoAutoExposed() const
+{
+	UE_LOG(LogAuto, Warning, TEXT("AAutoExposed::DoAutoExposed()"));
+}

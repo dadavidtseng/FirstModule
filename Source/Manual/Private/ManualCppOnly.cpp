@@ -16,5 +16,5 @@ FManualCppOnly::FManualCppOnly()
 //----------------------------------------------------------------------------------------------------
 void FManualCppOnly::DoManualCppOnly()
 {
-	UE_LOG(LogManual, Warning, TEXT("FManualCppOnly::FManualCppOnly()"));
+	UE_LOG(LogManual, Warning, TEXT("FManualCppOnly::DoManualCppOnly()"));
 }

@@ -1,16 +1,20 @@
 ﻿//----------------------------------------------------------------------------------------------------
-// ManualCppOnly.h
+// ManualCppOnly.cpp
 //----------------------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------------------
-#pragma once
+#include "AutoCppOnly.h"
 
-#include <CoreMinimal.h>
+#include "AutoModule.h"
 
 //----------------------------------------------------------------------------------------------------
-class MANUAL_API FManualCppOnly
+FAutoCppOnly::FAutoCppOnly()
 {
-public:
-	FManualCppOnly();
-	void DoManualCppOnly();
-};
+	UE_LOG(LogAuto, Warning, TEXT("FAutoCppOnly::FAutoCppOnly()"));
+}
+
+//----------------------------------------------------------------------------------------------------
+void FAutoCppOnly::DoAutoCppOnly() const
+{
+	UE_LOG(LogAuto, Warning, TEXT("FAutoCppOnly::DoAutoCppOnly()"));
+}

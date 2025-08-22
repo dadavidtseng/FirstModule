@@ -1,26 +1,29 @@
-﻿using UnrealBuildTool;
+﻿//----------------------------------------------------------------------------------------------------
+// Auto.Build.cs
+//----------------------------------------------------------------------------------------------------
 
+//----------------------------------------------------------------------------------------------------
+
+using UnrealBuildTool;
+
+//----------------------------------------------------------------------------------------------------
 public class Auto : ModuleRules
 {
     public Auto(ReadOnlyTargetRules Target) : base(Target)
     {
-        PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
+        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
         PublicDependencyModuleNames.AddRange(
-            new string[]
-            {
-                "Core",
-            }
+            [
+                "Core"
+            ]
         );
 
         PrivateDependencyModuleNames.AddRange(
-            new string[]
-            {
+            [
                 "CoreUObject",
-                "Engine",
-                "Slate",
-                "SlateCore"
-            }
+                "Engine"
+            ]
         );
     }
 }

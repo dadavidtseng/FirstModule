@@ -1,30 +1,30 @@
-//----------------------------------------------------------------------------------------------------
-// ManualModule.cpp
+﻿//----------------------------------------------------------------------------------------------------
+// AutoModule.cpp
 //----------------------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------------------
-#include "ManualModule.h"
-
+#include "AutoModule.h"
 #include <Modules/ModuleManager.h>
 
 //----------------------------------------------------------------------------------------------------
-DEFINE_LOG_CATEGORY(LogManual);
+DEFINE_LOG_CATEGORY(LogAuto);
 
 //----------------------------------------------------------------------------------------------------
-#define LOCTEXT_NAMESPACE "FManualModule"
+#define LOCTEXT_NAMESPACE "FAutoModule"
 
 //----------------------------------------------------------------------------------------------------
-void FManualModule::StartupModule()
+void FAutoModule::StartupModule()
 {
-    UE_LOG(LogManual, Warning, TEXT("FManualModule::StartupModule()"));
+	UE_LOG(LogAuto, Warning, TEXT("FAutoModule::StartupModule()"));
 }
 
 //----------------------------------------------------------------------------------------------------
-void FManualModule::ShutdownModule()
+void FAutoModule::ShutdownModule()
 {
-    UE_LOG(LogManual, Warning, TEXT("FManualModule::ShutdownModule()"));
+	UE_LOG(LogAuto, Warning, TEXT("FAutoModule::ShutdownModule()"));
 }
 
 #undef LOCTEXT_NAMESPACE
 
-IMPLEMENT_MODULE(FManualModule, Manual)
+//----------------------------------------------------------------------------------------------------
+IMPLEMENT_MODULE(FAutoModule, Auto)

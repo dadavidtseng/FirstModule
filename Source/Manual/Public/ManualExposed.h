@@ -6,6 +6,9 @@
 #pragma once
 
 #include <CoreMinimal.h>
+
+#include "AutoCppOnly.h"
+
 #include <ManualExposed.generated.h>
 
 //----------------------------------------------------------------------------------------------------
@@ -19,4 +22,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Manual")
 	void DoManualExposed() const;
+
+	FAutoCppOnly AutoCppOnly;
 };

@@ -1,5 +1,5 @@
 ﻿//----------------------------------------------------------------------------------------------------
-// ManualCppOnly.h
+// AutoExposed.h
 //----------------------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------------------
@@ -7,10 +7,17 @@
 
 #include <CoreMinimal.h>
 
+#include <AutoExposed.generated.h>
+
 //----------------------------------------------------------------------------------------------------
-class MANUAL_API FManualCppOnly
+UCLASS(Blueprintable)
+class AUTO_API AAutoExposed : public AActor
 {
+	GENERATED_BODY()
+
 public:
-	FManualCppOnly();
-	void DoManualCppOnly();
+	AAutoExposed();
+
+	UFUNCTION(BlueprintCallable, Category = "Auto")
+	void DoAutoExposed() const;
 };

@@ -1,16 +1,19 @@
 ﻿//----------------------------------------------------------------------------------------------------
-// ManualCppOnly.h
+// AutoModule.h
 //----------------------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------------------
 #pragma once
 
 #include <CoreMinimal.h>
+#include <Modules/ModuleManager.h>
 
 //----------------------------------------------------------------------------------------------------
-class MANUAL_API FManualCppOnly
+DECLARE_LOG_CATEGORY_EXTERN(LogAuto, Log, All);
+
+class FAutoModule final : public IModuleInterface
 {
 public:
-	FManualCppOnly();
-	void DoManualCppOnly();
+    virtual void StartupModule() override;
+    virtual void ShutdownModule() override;
 };

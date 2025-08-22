@@ -1,16 +1,20 @@
 ﻿//----------------------------------------------------------------------------------------------------
-// ManualCppOnly.h
+// AutoInternal.cpp
 //----------------------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------------------
-#pragma once
+#include "AutoInternal.h"
 
-#include <CoreMinimal.h>
+#include "AutoModule.h"
 
 //----------------------------------------------------------------------------------------------------
-class MANUAL_API FManualCppOnly
+FAutoInternal::FAutoInternal()
 {
-public:
-	FManualCppOnly();
-	void DoManualCppOnly();
-};
+	UE_LOG(LogAuto, Warning, TEXT("FAutoInternal::FAutoInternal()"));
+}
+
+//----------------------------------------------------------------------------------------------------
+void FAutoInternal::DoAutoInternal() const
+{
+	UE_LOG(LogAuto, Warning, TEXT("FAutoInternal::DoAutoInternal()"));
+}
