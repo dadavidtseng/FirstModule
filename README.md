@@ -60,7 +60,7 @@ Source/
 
 ```
 FirstModule/Source/
-├── Auto/                    # IDE-created module
+├── Auto/                       # IDE-created module
 │   ├── Auto.Build.cs
 │   ├── Public/
 │   │   ├── AutoModule.h
@@ -72,7 +72,7 @@ FirstModule/Source/
 │       ├── AutoExposed.cpp
 │       ├── AutoInternal.cpp
 │       └── AutoInternal.h
-├── Manual/                  # Manually created module
+├── Manual/                     # Manually created module
 │   ├── Manual.Build.cs
 │   ├── Public/
 │   │   ├── ManualModule.h
@@ -84,7 +84,7 @@ FirstModule/Source/
 │       ├── ManualExposed.cpp
 │       ├── ManualInternal.cpp
 │       └── ManualInternal.h    # Internal implementation
-└── FirstModule/             # Main game module
+└── FirstModule/                # Main game module
     ├── FirstModule.Build.cs
     ├── FirstModule.cpp
     └── FirstModule.h
@@ -551,7 +551,7 @@ class FManualInternal
 };
 ```
 
-### 2. Naming Conventions (From Real Project)
+### 2. Naming Conventions
 
 - **Module Names**: Use PascalCase, e.g., `Auto`, `Manual`
 - **Class Names**: Use appropriate prefix:
@@ -560,20 +560,20 @@ class FManualInternal
   - `U` for UObject-derived: `UManualComponent`
 - **API Macros**: Use uppercase module name: `MANUAL_API`, `AUTO_API`
 
-### 3. Directory Organization (Real Structure)
+### 3. Directory Organization
 
 ```
 Source/Manual/
-├── Public/                  # External interface
-│   ├── ManualModule.h      # Module definition
-│   ├── ManualCppOnly.h     # C++ only classes
-│   └── ManualExposed.h     # Blueprint compatible
-└── Private/                 # Internal implementation
-    ├── ManualModule.cpp    # Module implementation
-    ├── ManualCppOnly.cpp   # C++ implementation
-    ├── ManualExposed.cpp   # Blueprint class implementation
-    ├── ManualInternal.h    # Internal definitions
-    └── ManualInternal.cpp  # Internal implementation
+├── Public/                   # External interface
+│   ├── ManualModule.h        # Module definition
+│   ├── ManualCppOnly.h       # C++ only classes
+│   └── ManualExposed.h       # Blueprint compatible
+└── Private/                  # Internal implementation
+    ├── ManualModule.cpp      # Module implementation
+    ├── ManualCppOnly.cpp     # C++ implementation
+    ├── ManualExposed.cpp     # Blueprint class implementation
+    ├── ManualInternal.h      # Internal definitions
+    └── ManualInternal.cpp    # Internal implementation
 ```
 
 ### 4. API Exposure Control
