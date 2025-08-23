@@ -51,6 +51,13 @@ Source/
 
 ### Real Project Structure (FirstModule)
 
+> **📝 Important Note:** 
+> The module names **Auto** and **Manual** in this project are chosen purely to demonstrate two different methods of module creation:
+> - **Auto**: Created using IDE (JetBrains Rider) with automatic generation
+> - **Manual**: Created manually with full control over the process
+> 
+> These names have **no special meaning** regarding module dependencies or functionality. The same principles apply to any module names (e.g., ModuleA/ModuleB, GameplayCore/UISystem, etc.). The dependency relationship (Manual depends on Auto) is simply for demonstration purposes and could easily be reversed or applied to any other module combination.
+
 ```
 FirstModule/Source/
 ├── Auto/                    # IDE-created module
@@ -362,6 +369,18 @@ IMPLEMENT_MODULE(FAutoModule, Auto)
 4. **Configure module settings** and finish creation
 
 ## Module Dependencies
+
+> **📝 Naming Convention Note:**
+> In this project, "Manual depends on Auto" is purely for demonstration. The dependency direction has nothing to do with how the modules were created (manually vs IDE). In real projects, you might have:
+> - `GameplayCore` depends on `UtilityLibrary`
+> - `UISystem` depends on `GameplayCore` 
+> - `AudioManager` depends on `ConfigurationModule`
+> - `PlayerController` depends on `InputManager`
+> 
+> The dependency direction and module names should reflect your actual project architecture, not the creation method. You could equally have:
+> - Auto depends on Manual
+> - ModuleA depends on ModuleB
+> - Any meaningful combination based on your project needs
 
 ### Manual Module Depends on Auto Module
 
