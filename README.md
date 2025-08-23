@@ -1,4 +1,19 @@
-# Unreal Engine Module Development Handbook
+# FirstModule
+
+## A Complete Guide to Creating and Managing UE5 Modules
+
+<!-- Banner Image Placeholder -->
+![Project Banner](./banner.png)
+<!-- You can add your project banner image here -->
+
+![C++](https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
+![Unreal Engine](https://img.shields.io/badge/Unreal%20Engine-0E1128?style=for-the-badge&logo=unrealengine&logoColor=white)
+![Version](https://img.shields.io/badge/UE%20Version-5.6.1-blue?style=for-the-badge)
+![License](https://img.shields.io/badge/License-Apache%202.0-green?style=for-the-badge)
+![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge)
+![Platform](https://img.shields.io/badge/Platform-Windows-0078D4?style=for-the-badge&logo=windows&logoColor=white)
+
+---
 
 ## Table of Contents
 1. [What is an Unreal Module](#what-is-an-unreal-module)
@@ -20,7 +35,7 @@ An Unreal Engine Module is the fundamental unit of code organization, similar to
 
 ## Module Structure Analysis
 
-A standard Unreal Module has the following directory structure:
+### Standard Unreal Module Structure
 
 ```
 Source/
@@ -34,6 +49,40 @@ Source/
         └── [PrivateClass].cpp      # Other implementation files
 ```
 
+### Real Project Structure (FirstModule)
+
+```
+FirstModule/Source/
+├── Auto/                    # IDE-created module
+│   ├── Auto.Build.cs
+│   ├── Public/
+│   │   ├── AutoModule.h
+│   │   ├── AutoCppOnly.h
+│   │   └── AutoExposed.h
+│   └── Private/
+│       ├── AutoModule.cpp
+│       ├── AutoCppOnly.cpp
+│       ├── AutoExposed.cpp
+│       ├── AutoInternal.cpp
+│       └── AutoInternal.h
+├── Manual/                  # Manually created module
+│   ├── Manual.Build.cs
+│   ├── Public/
+│   │   ├── ManualModule.h
+│   │   ├── ManualCppOnly.h     # C++ only classes
+│   │   └── ManualExposed.h     # Blueprint compatible
+│   └── Private/
+│       ├── ManualModule.cpp
+│       ├── ManualCppOnly.cpp
+│       ├── ManualExposed.cpp
+│       ├── ManualInternal.cpp
+│       └── ManualInternal.h    # Internal implementation
+└── FirstModule/             # Main game module
+    ├── FirstModule.Build.cs
+    ├── FirstModule.cpp
+    └── FirstModule.h
+```
+
 ### Core Files Explanation
 
 1. **Build.cs File**: Defines compilation settings and dependencies
@@ -44,22 +93,163 @@ Source/
 
 ## Creating Modules Manually
 
+Let's examine how the **Manual** module was created in this project:
+
 ### Step 1: Create Directory Structure
 
 Create a new module folder under the `Source/` directory:
 
 ```
 Source/
-└── YourModuleName/
+└── Manual/
     ├── Public/
     └── Private/
 ```
 
 ### Step 2: Create Build.cs File
 
-Create `Source/YourModuleName/YourModuleName.Build.cs`:
+Create `Source/Manual/Manual.Build.cs`:
 
 ```csharp
+//----------------------------------------------------------------------------------------------------
+// Manual.Build.cs
+//----------------------------------------------------------------------------------------------------
+
+using UnrealBuildTool;
+
+public class Manual : ModuleRules
+{
+	public Manual(ReadOnlyTargetRules Target) : base(Target)
+	{
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
+		PublicDependencyModuleNames.AddRange([
+			"Core",
+			"Auto"  // This module depends on Auto module
+		]);
+
+		PrivateDependencyModuleNames.AddRange([
+			"CoreUObject",
+			"Engine"
+		]);
+	}
+}
+```
+
+### Step 3: Create Module Header File
+
+Create `Source/Manual/Public/ManualModule.h`:
+
+```cpp
+//----------------------------------------------------------------------------------------------------
+// ManualModule.h
+//----------------------------------------------------------------------------------------------------
+
+#pragma once
+
+#include <CoreMinimal.h>
+#include <Modules/ModuleManager.h>
+
+DECLARE_LOG_CATEGORY_EXTERN(LogManual, Log, All);
+
+class MANUAL_API FManualModule final : public IModuleInterface
+{
+public:
+	virtual void StartupModule() override;
+	virtual void ShutdownModule() override;
+};
+```
+
+### Step 4: Create Module Implementation File
+
+Create `Source/Manual/Private/ManualModule.cpp`:
+
+```cpp
+//----------------------------------------------------------------------------------------------------
+// ManualModule.cpp
+//----------------------------------------------------------------------------------------------------
+
+#include "ManualModule.h"
+#include <Modules/ModuleManager.h>
+
+DEFINE_LOG_CATEGORY(LogManual);
+
+#define LOCTEXT_NAMESPACE "FManualModule"
+
+void FManualModule::StartupModule()
+{
+    UE_LOG(LogManual, Warning, TEXT("FManualModule::StartupModule()"));
+}
+
+void FManualModule::ShutdownModule()
+{
+    UE_LOG(LogManual, Warning, TEXT("FManualModule::ShutdownModule()"));
+}
+
+#undef LOCTEXT_NAMESPACE
+
+IMPLEMENT_MODULE(FManualModule, Manual)
+```
+
+### Step 5: Register Module to Project
+
+**FirstModule.uproject:**
+```json
+{
+  "FileVersion": 3,
+  "EngineAssociation": "5.6",
+  "Modules": [
+    {
+      "Name": "FirstModule",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    },
+    {
+      "Name": "Auto",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    },
+    {
+      "Name": "Manual",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ]
+}
+```
+
+**FirstModule.Target.cs:**
+```csharp
+//----------------------------------------------------------------------------------------------------
+// FirstModule.Target.cs
+//----------------------------------------------------------------------------------------------------
+
+using UnrealBuildTool;
+
+public class FirstModuleTarget : TargetRules
+{
+	public FirstModuleTarget(TargetInfo Target) : base(Target)
+	{
+		Type                 = TargetType.Game;
+		DefaultBuildSettings = BuildSettingsVersion.V5;
+		IncludeOrderVersion  = EngineIncludeOrderVersion.Unreal5_6;
+		ExtraModuleNames.Add("FirstModule");
+		RegisterModulesCreatedByRider();
+	}
+
+	private void RegisterModulesCreatedByRider()
+	{
+		ExtraModuleNames.AddRange(["Auto", "Manual"]);
+	}
+}
+```
+
+### Generic Template for Any Module
+
+For creating your own modules, use this template:
+
+```csharp
+// YourModuleName.Build.cs
 using UnrealBuildTool;
 
 public class YourModuleName : ModuleRules
@@ -80,19 +270,56 @@ public class YourModuleName : ModuleRules
 }
 ```
 
-### Step 3: Create Module Header File
+## Creating Modules with IDE
 
-Create `Source/YourModuleName/Public/YourModuleNameModule.h`:
+### JetBrains Rider
+
+The **Auto** module in this project was created using Rider:
+
+1. **Right-click on the project root directory** → Select "Add" → "New Unreal Module"
+2. **Enter module name**: "Auto"
+3. **Select module type**: Runtime
+4. **Select loading phase**: Default
+5. **Click Confirm**, Rider automatically created:
+
+```csharp
+//----------------------------------------------------------------------------------------------------
+// Auto.Build.cs (Generated by Rider)
+//----------------------------------------------------------------------------------------------------
+
+using UnrealBuildTool;
+
+public class Auto : ModuleRules
+{
+    public Auto(ReadOnlyTargetRules Target) : base(Target)
+    {
+        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
+        PublicDependencyModuleNames.AddRange([
+            "Core"
+        ]);
+
+        PrivateDependencyModuleNames.AddRange([
+            "CoreUObject",
+            "Engine"
+        ]);
+    }
+}
+```
 
 ```cpp
+//----------------------------------------------------------------------------------------------------
+// AutoModule.h (Generated by Rider)
+//----------------------------------------------------------------------------------------------------
+
 #pragma once
 
-#include "CoreMinimal.h"
-#include "Modules/ModuleManager.h"
+#include <CoreMinimal.h>
+#include <Modules/ModuleManager.h>
 
-DECLARE_LOG_CATEGORY_EXTERN(LogYourModuleName, Log, All);
+DECLARE_LOG_CATEGORY_EXTERN(LogAuto, Log, All);
 
-class YOURMODULENAME_API FYourModuleNameModule : public IModuleInterface
+class FAutoModule final : public IModuleInterface
 {
 public:
     virtual void StartupModule() override;
@@ -100,120 +327,99 @@ public:
 };
 ```
 
-### Step 4: Create Module Implementation File
-
-Create `Source/YourModuleName/Private/YourModuleNameModule.cpp`:
-
 ```cpp
-#include "YourModuleNameModule.h"
-#include "Modules/ModuleManager.h"
+//----------------------------------------------------------------------------------------------------
+// AutoModule.cpp (Generated by Rider)
+//----------------------------------------------------------------------------------------------------
 
-DEFINE_LOG_CATEGORY(LogYourModuleName);
+#include "AutoModule.h"
+#include <Modules/ModuleManager.h>
 
-#define LOCTEXT_NAMESPACE "FYourModuleNameModule"
+DEFINE_LOG_CATEGORY(LogAuto);
 
-void FYourModuleNameModule::StartupModule()
+#define LOCTEXT_NAMESPACE "FAutoModule"
+
+void FAutoModule::StartupModule()
 {
-    UE_LOG(LogYourModuleName, Warning, TEXT("YourModuleName module has been loaded"));
+	UE_LOG(LogAuto, Warning, TEXT("FAutoModule::StartupModule()"));
 }
 
-void FYourModuleNameModule::ShutdownModule()
+void FAutoModule::ShutdownModule()
 {
-    UE_LOG(LogYourModuleName, Warning, TEXT("YourModuleName module has been unloaded"));
+	UE_LOG(LogAuto, Warning, TEXT("FAutoModule::ShutdownModule()"));
 }
 
 #undef LOCTEXT_NAMESPACE
 
-IMPLEMENT_MODULE(FYourModuleNameModule, YourModuleName)
+IMPLEMENT_MODULE(FAutoModule, Auto)
 ```
-
-### Step 5: Register Module to Project
-
-Add the module to your `.uproject` file:
-
-```json
-{
-  "Modules": [
-    {
-      "Name": "YourModuleName",
-      "Type": "Runtime",
-      "LoadingPhase": "Default"
-    }
-  ]
-}
-```
-
-Add the module to your `Target.cs` files:
-
-```csharp
-private void RegisterModulesCreatedByRider()
-{
-    ExtraModuleNames.AddRange(["YourModuleName"]);
-}
-```
-
-## Creating Modules with IDE
-
-### JetBrains Rider
-
-1. **Right-click on the project root directory** → Select "Add" → "New Unreal Module"
-2. **Enter module name**: e.g., "YourModuleName"
-3. **Select module type**:
-   - Runtime: Runtime game module
-   - Editor: Editor-only module
-   - Developer: Development tool module
-4. **Select loading phase**:
-   - Default: Default loading
-   - PostEngineInit: Load after engine initialization
-   - PreDefault: Load before default
-5. **Click Confirm**, Rider will automatically:
-   - Create directory structure
-   - Generate Build.cs file
-   - Create module header and implementation files
-   - Update .uproject file
-   - Update Target.cs files
 
 ### Visual Studio
 
 1. **Install Unreal Engine Extension**
 2. **Right-click on Solution** → "Add" → "New Project"
 3. **Select Unreal Engine Module Template**
-4. **Configure module settings**:
-   - Module name
-   - Module type
-   - Loading phase
-5. **Finish creation**, Visual Studio will automatically handle all files
+4. **Configure module settings** and finish creation
 
 ## Module Dependencies
 
-### Establishing Dependencies
+### Manual Module Depends on Auto Module
 
-Add dependencies in the Build.cs file:
-
+**Manual.Build.cs shows the dependency:**
 ```csharp
-public class Auto : ModuleRules
-{
-    public Auto(ReadOnlyTargetRules Target) : base(Target)
-    {
-        PublicDependencyModuleNames.AddRange([
-            "Core",
-            "Manual"  // Depends on Manual module
-        ]);
-    }
-}
+PublicDependencyModuleNames.AddRange([
+    "Core",
+    "Auto"  // Manual depends on Auto
+]);
 ```
 
 ### Using Classes from Other Modules
 
-Include header files from other modules in cpp files:
-
+**ManualExposed.h includes AutoCppOnly:**
 ```cpp
-#include "Auto.h"
-#include "ManualCppOnly.h"  // From Manual module
+//----------------------------------------------------------------------------------------------------
+// ManualExposed.h
+//----------------------------------------------------------------------------------------------------
 
-void FAutoModule::StartupModule()
+#pragma once
+
+#include <CoreMinimal.h>
+#include "AutoCppOnly.h"  // Include from Auto module
+#include <ManualExposed.generated.h>
+
+UCLASS(Blueprintable)
+class MANUAL_API AManualExposed : public AActor
 {
-    FManualCppOnly::ProcessLargeDataset({1.0f, 2.0f, 3.0f});
+	GENERATED_BODY()
+
+public:
+	AManualExposed();
+
+	UFUNCTION(BlueprintCallable, Category = "Manual")
+	void DoManualExposed() const;
+
+	FAutoCppOnly AutoCppOnly;  // Using class from Auto module
+};
+```
+
+**ManualExposed.cpp uses the Auto module class:**
+```cpp
+//----------------------------------------------------------------------------------------------------
+// ManualExposed.cpp
+//----------------------------------------------------------------------------------------------------
+
+#include "ManualExposed.h"
+#include "ManualModule.h"
+
+AManualExposed::AManualExposed()
+{
+	UE_LOG(LogManual, Warning, TEXT("AManualExposed::AManualExposed()"));
+}
+
+void AManualExposed::DoManualExposed() const
+{
+	UE_LOG(LogManual, Warning, TEXT("AManualExposed::DoManualExposed()"));
+	AutoCppOnly.DoAutoCppOnly();  // Call method from Auto module
 }
 ```
 
@@ -224,83 +430,11 @@ void FAutoModule::StartupModule()
 
 ## Best Practices
 
-### 1. Naming Conventions
+### 1. Class Classification System (Real Implementation)
 
-- **Module Names**: Use PascalCase, e.g., `GameplayAbilities`
-- **Class Names**: Use F prefix, e.g., `FMyModuleClass`
-- **API Macros**: Use uppercase module name, e.g., `MYMODULE_API`
+Based on this project's structure, here's the three-tier classification:
 
-### 2. Directory Organization
-
-```
-Source/YourModule/
-├── Public/
-│   ├── YourModuleModule.h
-│   ├── Core/           # Core functionality
-│   ├── Components/     # Component classes
-│   └── Interfaces/     # Interface definitions
-└── Private/
-    ├── YourModuleModule.cpp
-    ├── Core/
-    ├── Components/
-    └── Tests/          # Unit tests
-```
-
-### 3. API Exposure Control
-
-```cpp
-// Public class - can be used by other modules
-class YOURMODULE_API FPublicClass
-{
-    // ...
-};
-
-// Private class - internal use only
-class FPrivateClass
-{
-    // ...
-};
-```
-
-### 4. Module Loading Order
-
-Control loading order in .uproject:
-
-```json
-{
-  "Modules": [
-    {
-      "Name": "CoreModule",
-      "Type": "Runtime",
-      "LoadingPhase": "PostEngineInit"
-    },
-    {
-      "Name": "GameplayModule",
-      "Type": "Runtime",
-      "LoadingPhase": "Default"
-    }
-  ]
-}
-```
-
-### 5. Log Management
-
-```cpp
-// Declare in module header file
-DECLARE_LOG_CATEGORY_EXTERN(LogYourModule, Log, All);
-
-// Define in module implementation file
-DEFINE_LOG_CATEGORY(LogYourModule);
-
-// Usage
-UE_LOG(LogYourModule, Warning, TEXT("Module message"));
-```
-
-### 6. Class Classification System
-
-Based on the project structure, here's a recommended classification:
-
-#### ManualCppOnly
+#### ManualCppOnly (C++ Only Classes)
 **Purpose**: High-performance C++ API for other modules
 **Features**:
 - ✅ Other C++ modules can use
@@ -308,110 +442,148 @@ Based on the project structure, here's a recommended classification:
 - ⚡ High performance, no reflection system overhead
 
 ```cpp
+//----------------------------------------------------------------------------------------------------
 // ManualCppOnly.h
-#pragma once
-#include "CoreMinimal.h"
+//----------------------------------------------------------------------------------------------------
 
-/**
- * High-performance computation class
- * C++ modules only, Blueprint incompatible
- */
+#pragma once
+
+#include <CoreMinimal.h>
+
 class MANUAL_API FManualCppOnly
 {
 public:
-    /** High-performance data processing */
-    static TArray<float> ProcessLargeDataset(const TArray<float>& Input);
-    
-    /** String hash calculation */
-    static uint32 CalculateHash(const FString& Input);
-    
-    /** Mathematical calculation tools */
-    static FVector CalculateTrajectory(const FVector& Start, const FVector& Velocity, float Time);
+	FManualCppOnly();
+	void DoManualCppOnly();
 };
 ```
 
-#### ManualExposed
+```cpp
+//----------------------------------------------------------------------------------------------------
+// ManualCppOnly.cpp
+//----------------------------------------------------------------------------------------------------
+
+#include "ManualCppOnly.h"
+#include "ManualModule.h"
+
+FManualCppOnly::FManualCppOnly()
+{
+	UE_LOG(LogManual, Warning, TEXT("FManualCppOnly::FManualCppOnly()"));
+}
+
+void FManualCppOnly::DoManualCppOnly()
+{
+	UE_LOG(LogManual, Warning, TEXT("FManualCppOnly::DoManualCppOnly()"));
+}
+```
+
+#### ManualExposed (Blueprint Compatible Classes)
 **Purpose**: Blueprint-compatible game logic
 **Features**:
 - ✅ Other C++ modules can use
 - ✅ Blueprint can inherit/call
-- 🔄 Can internally call ManualCppOnly's high-performance functions
+- 🔄 Can internally call other module's classes (like AutoCppOnly)
 
 ```cpp
+//----------------------------------------------------------------------------------------------------
 // ManualExposed.h
-#pragma once
-#include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
-#include "ManualExposed.generated.h"
+//----------------------------------------------------------------------------------------------------
 
-/**
- * Blueprint-compatible game logic class
- * Supports both C++ and Blueprint usage
- */
-UCLASS(BlueprintType, Blueprintable)
-class MANUAL_API UManualExposed : public UObject
+#pragma once
+
+#include <CoreMinimal.h>
+#include "AutoCppOnly.h"
+#include <ManualExposed.generated.h>
+
+UCLASS(Blueprintable)
+class MANUAL_API AManualExposed : public AActor
 {
-    GENERATED_BODY()
+	GENERATED_BODY()
 
 public:
-    UManualExposed();
+	AManualExposed();
 
-    /** Blueprint-callable data processing */
-    UFUNCTION(BlueprintCallable, Category = "Manual")
-    void ProcessGameData(const TArray<float>& GameData);
-    
-    /** Blueprint-callable trajectory calculation */
-    UFUNCTION(BlueprintCallable, Category = "Manual")
-    FVector CalculateProjectilePath(FVector StartPos, FVector Velocity, float TimeStep);
-    
-    /** Blueprint read-write property */
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Manual")
-    float ProcessingMultiplier;
-    
-    /** Blueprint read-only result */
-    UPROPERTY(BlueprintReadOnly, Category = "Manual")
-    TArray<float> ProcessedResults;
+	UFUNCTION(BlueprintCallable, Category = "Manual")
+	void DoManualExposed() const;
 
-protected:
-    /** Blueprint implementable event */
-    UFUNCTION(BlueprintImplementableEvent, Category = "Manual")
-    void OnProcessingComplete();
+	FAutoCppOnly AutoCppOnly;
 };
 ```
 
-#### ManualInternal
+#### ManualInternal (Internal Implementation)
 **Purpose**: Internal module implementation details
 **Features**:
-- ❌ Other modules cannot use
+- ❌ Other modules cannot use (located in Private folder)
 - ❌ Blueprint cannot access
 - 🔒 Encapsulates implementation details
 
 ```cpp
-// ManualInternal.h (in Private folder)
-#pragma once
-#include "CoreMinimal.h"
+//----------------------------------------------------------------------------------------------------
+// ManualInternal.h
+//----------------------------------------------------------------------------------------------------
 
-/**
- * Internal module utility class
- * Not exposed externally, internal use only
- */
+#pragma once
+#include <CoreMinimal.h>
+
 class FManualInternal
 {
-public:
-    /** Internal cache management */
-    static void InitializeCache();
-    static void ClearCache();
-    
-    /** Internal configuration loading */
-    static bool LoadModuleConfig();
-    
-    /** Internal logging tools */
-    static void LogDebugInfo(const FString& Message);
-
-private:
-    static TMap<FString, float> InternalCache;
-    static bool bIsInitialized;
+	FManualInternal();
+	void DoManualInternal() const;
 };
+```
+
+### 2. Naming Conventions (From Real Project)
+
+- **Module Names**: Use PascalCase, e.g., `Auto`, `Manual`
+- **Class Names**: Use appropriate prefix:
+  - `F` for regular classes: `FManualCppOnly`
+  - `A` for Actors: `AManualExposed`
+  - `U` for UObject-derived: `UManualComponent`
+- **API Macros**: Use uppercase module name: `MANUAL_API`, `AUTO_API`
+
+### 3. Directory Organization (Real Structure)
+
+```
+Source/Manual/
+├── Public/                  # External interface
+│   ├── ManualModule.h      # Module definition
+│   ├── ManualCppOnly.h     # C++ only classes
+│   └── ManualExposed.h     # Blueprint compatible
+└── Private/                 # Internal implementation
+    ├── ManualModule.cpp    # Module implementation
+    ├── ManualCppOnly.cpp   # C++ implementation
+    ├── ManualExposed.cpp   # Blueprint class implementation
+    ├── ManualInternal.h    # Internal definitions
+    └── ManualInternal.cpp  # Internal implementation
+```
+
+### 4. API Exposure Control
+
+```cpp
+// Public class - can be used by other modules
+class MANUAL_API FManualCppOnly  // Has MANUAL_API macro
+{
+    // Accessible from other modules
+};
+
+// Private class - internal use only
+class FManualInternal  // No API macro, in Private folder
+{
+    // Internal use only
+};
+```
+
+### 5. Log Management (Real Implementation)
+
+```cpp
+// In ManualModule.h
+DECLARE_LOG_CATEGORY_EXTERN(LogManual, Log, All);
+
+// In ManualModule.cpp
+DEFINE_LOG_CATEGORY(LogManual);
+
+// Usage throughout the module
+UE_LOG(LogManual, Warning, TEXT("FManualCppOnly::DoManualCppOnly()"));
 ```
 
 ## Common Issues and Solutions
@@ -431,8 +603,8 @@ private:
 **Symptoms**: Cannot find header files or linking errors
 
 **Solutions**:
-1. Check dependencies in Build.cs
-2. Confirm API macros are used correctly
+1. Check dependencies in Build.cs (like Manual depending on Auto)
+2. Confirm API macros are used correctly (`MANUAL_API`, `AUTO_API`)
 3. Check include paths
 4. Clean and rebuild
 
@@ -446,16 +618,7 @@ private:
 3. Use forward declarations to reduce dependencies
 4. Consider using interfaces for decoupling
 
-### Issue 4: Module Loading Order Issues
-
-**Symptoms**: Module loads at wrong time
-
-**Solutions**:
-1. Adjust LoadingPhase settings
-2. Check module dependency relationships
-3. Use appropriate loading phases
-
-### Issue 5: Blueprint Integration Issues
+### Issue 4: Blueprint Integration Issues
 
 **Symptoms**: C++ classes not visible in Blueprint
 
@@ -466,25 +629,28 @@ private:
 4. Use UPROPERTY for accessible properties
 5. Regenerate project files after changes
 
+**Example from ManualExposed (Working Blueprint Class):**
 ```cpp
-// Correct Blueprint-compatible class
-UCLASS(BlueprintType, Blueprintable)
-class MANUAL_API UMyBlueprintClass : public UObject
+UCLASS(Blueprintable)  // Makes class available in Blueprint
+class MANUAL_API AManualExposed : public AActor
 {
     GENERATED_BODY()
 
 public:
-    UFUNCTION(BlueprintCallable, Category = "MyModule")
-    void MyFunction();
-
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "MyModule")
-    float MyProperty;
+    UFUNCTION(BlueprintCallable, Category = "Manual")  // Callable from Blueprint
+    void DoManualExposed() const;
 };
 ```
 
-### Issue 6: Constructor Called Multiple Times
+### Issue 5: Constructor Called Multiple Times
 
 **Symptoms**: Constructor logs appear multiple times before game starts
+
+```
+LogManual: Warning: AManualExposed::AManualExposed()
+LogManual: Warning: AManualExposed::AManualExposed()
+LogManual: Warning: AManualExposed::AManualExposed()
+```
 
 **This is normal behavior!** UE calls constructors for:
 1. **CDO (Class Default Object)** creation
@@ -498,18 +664,17 @@ public:
 - Use `IsTemplate()` to check if it's a CDO
 
 ```cpp
-UMyClass::UMyClass()
+AManualExposed::AManualExposed()
 {
-    // ✅ Good: Set default values
-    MyProperty = 1.0f;
-    bIsInitialized = false;
+    // ✅ Good: Just log and set defaults
+    UE_LOG(LogManual, Warning, TEXT("AManualExposed::AManualExposed()"));
     
     // ❌ Bad: Don't do game logic here
     // StartGameplay();
     // LoadAssets();
 }
 
-void UMyClass::BeginPlay()
+void AManualExposed::BeginPlay()
 {
     Super::BeginPlay();
     // ✅ Good: Game logic goes here
@@ -520,57 +685,49 @@ void UMyClass::BeginPlay()
 ## Core Module Macros Explained
 
 ### DEFINE_LOG_CATEGORY(LogManual)
+```cpp
+// In ManualModule.cpp
+DEFINE_LOG_CATEGORY(LogManual);
+```
 - **Purpose**: Creates a dedicated log category for the module
 - **Usage**: `UE_LOG(LogManual, Warning, TEXT("Message"));`
 - **Benefits**: Filter module-specific logs in editor
 
 ### LOCTEXT_NAMESPACE "FManualModule"
+```cpp
+// In ManualModule.cpp
+#define LOCTEXT_NAMESPACE "FManualModule"
+// ... module code ...
+#undef LOCTEXT_NAMESPACE
+```
 - **Purpose**: Sets namespace for localization text
 - **Usage**: `LOCTEXT("Key", "Default Text")`
 - **Benefits**: Supports game internationalization
 
-### #undef LOCTEXT_NAMESPACE
-- **Purpose**: Cleans up namespace definition
-- **Importance**: Prevents affecting other files
-
 ### IMPLEMENT_MODULE(FManualModule, Manual)
+```cpp
+// In ManualModule.cpp
+IMPLEMENT_MODULE(FManualModule, Manual)
+```
 - **Purpose**: Registers module with UE system
 - **Format**: `IMPLEMENT_MODULE(ClassName, ModuleName)`
 - **Critical**: Without this, module won't load!
 
 ## Conclusion
 
-Unreal Engine's module system is a powerful tool for organizing large projects. Through proper module design, you can:
+This handbook is based on the real **FirstModule** project, demonstrating:
 
+- **Auto Module**: Created using IDE (Rider) with automatic generation
+- **Manual Module**: Created manually with full control over structure
+- **Dependency System**: Manual depends on Auto, showing inter-module communication
+- **Classification System**: CppOnly, Exposed, and Internal classes for different access levels
+- **Blueprint Integration**: Real working examples of C++ to Blueprint exposure
+
+Through proper module design, you can:
 - Improve code maintainability
 - Facilitate team collaboration
 - Enable feature reuse
 - Optimize compilation time
+- Create clear separation between C++ and Blueprint functionality
 
 Remember, good module design is the foundation of successful UE projects. Start with small modules and gradually build your modular architecture.
-
-## Example Project Structure
-
-This handbook is based on the FirstModule project structure:
-
-```
-FirstModule/
-├── Source/
-│   ├── Auto/                    # IDE-created module
-│   ├── Manual/                  # Manually created module
-│   │   ├── Public/
-│   │   │   ├── ManualModule.h
-│   │   │   ├── ManualCppOnly.h     # C++ only classes
-│   │   │   └── ManualExposed.h     # Blueprint compatible
-│   │   └── Private/
-│   │       ├── ManualModule.cpp
-│   │       ├── ManualCppOnly.cpp
-│   │       ├── ManualExposed.cpp
-│   │       └── ManualInternal.cpp  # Internal implementation
-│   └── Auto/                    # Example dependent module
-└── Content/
-    └── Manual/
-        └── BP_ManualExposed     # Blueprint based on C++ class
-```
-
-This structure demonstrates the three-tier classification system for optimal code organization and Blueprint integration.
