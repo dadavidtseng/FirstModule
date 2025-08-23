@@ -1,6 +1,6 @@
 # FirstModule
 
-## A Complete Guide to Creating and Managing UE5 Modules
+## A Complete Handbook to Creating and Managing UE5 Modules
 
 <!-- Banner Image Placeholder -->
 ![Project Banner](./banner.png)
@@ -23,6 +23,8 @@
 5. [Module Dependencies](#module-dependencies)
 6. [Best Practices](#best-practices)
 7. [Common Issues and Solutions](#common-issues-and-solutions)
+8. [References](#references)
+9. [Contributing](#contributing)
 
 ## What is an Unreal Module
 
@@ -750,3 +752,26 @@ Through proper module design, you can:
 - Create clear separation between C++ and Blueprint functionality
 
 Remember, good module design is the foundation of successful UE projects. Start with small modules and gradually build your modular architecture.
+
+---
+
+## References
+
+
+1. [Unreal Engine Modules - Official Documentation](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-modules)
+2. [Improving Code Structure with Unreal Engine's C++ Modules](https://dev.epicgames.com/community/learning/tutorials/xJ/improving-code-structure-with-unreal-engine-s-c-modules)
+3. [Getting into C++ with Unreal Engine - Part 7 - Modules & Plugins](https://www.youtube.com/watch?v=-r4OmyrFC30)
+
+---
+
+## Contributing
+
+Feel free to contribute to this handbook by:
+- 📝 Adding more examples
+- 🐛 Reporting issues or improvements
+- 💡 Suggesting new sections or topics
+- 🌟 Sharing your own module development experiences
+
+## License
+
+This handbook is provided under the Apache 2.0 License. Feel free to use, modify, and distribute it for educational purposes.
