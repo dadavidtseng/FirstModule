@@ -285,11 +285,13 @@ public class YourModuleName : ModuleRules
 
 The **Auto** module in this project was created using Rider:
 
-1. **Right-click on the project root directory** → Select "Add" → "New Unreal Module"
-2. **Enter module name**: "Auto"
-3. **Select module type**: Runtime
-4. **Select loading phase**: Default
-5. **Click Confirm**, Rider automatically created:
+1. **Right-click on the project root directory** → Select `Add` → `Unreal Module…`
+![](https://private-user-images.githubusercontent.com/113273083/481330624-714fb914-e4a0-448b-b3e9-19330ed68a54.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU5ODgyMzYsIm5iZiI6MTc1NTk4NzkzNiwicGF0aCI6Ii8xMTMyNzMwODMvNDgxMzMwNjI0LTcxNGZiOTE0LWU0YTAtNDQ4Yi1iM2U5LTE5MzMwZWQ2OGE1NC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyM1QyMjI1MzZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iNDhlNTBiMTZlNTVmYTAyYTRlZTFiNmVjNDJjZDJlNDgwMDFhNWExZjZiY2M3NzdkMGQ1ZjIzODMzZWE3ODU3JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.amD3ZvgzcQ3EVAH8tc4rofSR1zVocnUAdQPYterFK8k)
+2. **Enter module name**: `YourModuleName`
+3. **Select module type**: `Runtime`
+4. **Select loading phase**: `Default`
+![](https://private-user-images.githubusercontent.com/113273083/481330676-4dfec85f-2f43-424e-bdb7-a637657bfd01.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU5ODgzMDcsIm5iZiI6MTc1NTk4ODAwNywicGF0aCI6Ii8xMTMyNzMwODMvNDgxMzMwNjc2LTRkZmVjODVmLTJmNDMtNDI0ZS1iZGI3LWE2Mzc2NTdiZmQwMS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyM1QyMjI2NDdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1kZDgzNGRlNzVhZDFkZjM5YmY1MWJlOTMwODJmM2ExNTExMjYxNzBhODdkZTc1ODkwYzQ5MmM4NWNhNTU0NjExJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.esgyNhFVSI2r8mnYCBp8TvQko8UxP0tU4hyFtcJffiM)
+5. **Click OK**, Rider automatically created:
 
 ```csharp
 //----------------------------------------------------------------------------------------------------
@@ -365,10 +367,16 @@ IMPLEMENT_MODULE(FAutoModule, Auto)
 
 ### Visual Studio
 
-1. **Install Unreal Engine Extension**
-2. **Right-click on Solution** → "Add" → "New Project"
-3. **Select Unreal Engine Module Template**
-4. **Configure module settings** and finish creation
+1. **Right-click on the project root directory** → Select `Add` → `Unreal Module…`
+![](https://private-user-images.githubusercontent.com/113273083/481331230-02c9c659-de10-4203-bdb5-0e5f86e7bc6d.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU5ODkzMjksIm5iZiI6MTc1NTk4OTAyOSwicGF0aCI6Ii8xMTMyNzMwODMvNDgxMzMxMjMwLTAyYzljNjU5LWRlMTAtNDIwMy1iZGI1LTBlNWY4NmU3YmM2ZC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyM1QyMjQzNDlaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1mNWU1YzhkNzE0YTQzMWI4NDU1NWQxMGYzZmQ4NmRlNDg3NTYzYTdiZDgwOWYyYzU1NGE1OGZkZGZhZGJlZjJmJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.3rd8JLWSmrjDPe55Ryacz21FH0BA6f8y4Qga8kgMePA)
+2. **Select Empty Unreal Engine Module**
+3. **Click Add**
+![](https://private-user-images.githubusercontent.com/113273083/481331276-c0adc6eb-558d-4794-9b42-d0ad07618658.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU5ODkzOTYsIm5iZiI6MTc1NTk4OTA5NiwicGF0aCI6Ii8xMTMyNzMwODMvNDgxMzMxMjc2LWMwYWRjNmViLTU1OGQtNDc5NC05YjQyLWQwYWQwNzYxODY1OC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyM1QyMjQ0NTZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1kZjI3NjZmMmNhMDg2MmRhM2MyNzVkOTUxMDUwYzUwZDgxN2UxNDYyN2E2NWVjOGQ1YWM4YzM0YWFiNzAyNGUzJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.rBeT-mZ-GojlMBB9vLUKoukVlhuRxeBEZZMY0hm1QsE)
+4. **Enter module name**: `YourModuleName`
+5. **Select module type**: `Runtime`
+6. **Select loading phase**: `Default`
+![](https://private-user-images.githubusercontent.com/113273083/481331304-5e94df61-989f-4eec-ae20-24780b34e215.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU5ODk0NjYsIm5iZiI6MTc1NTk4OTE2NiwicGF0aCI6Ii8xMTMyNzMwODMvNDgxMzMxMzA0LTVlOTRkZjYxLTk4OWYtNGVlYy1hZTIwLTI0NzgwYjM0ZTIxNS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyM1QyMjQ2MDZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0yMWZkOGNhMmFiYTcxMTdkNTQ4MzIwM2IxMWQzNGJiN2JjM2U1M2UyZmU1ZGVjNGFmM2I2M2RlNjRkMWUzNzJhJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.JvD0Zm--jxnnCUHUYq-ovL9iRJwMZUGQkZf0XCWk5Ok)
+7. **Click OK**
 
 ## Module Dependencies
 
