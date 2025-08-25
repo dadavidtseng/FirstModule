@@ -793,15 +793,11 @@ Through proper module design, you can:
 Remember, good module design is the foundation of successful UE projects. Start with small modules and gradually build
 your modular architecture.
 
----
-
 ## References
 
 1. [Unreal Engine Modules—Official Documentation](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-modules)
 2. [Improving Code Structure with Unreal Engine's C++ Modules](https://dev.epicgames.com/community/learning/tutorials/xJ/improving-code-structure-with-unreal-engine-s-c-modules)
 3. [Getting into C++ with Unreal Engine—Part 7 - Modules & Plugins](https://www.youtube.com/watch?v=-r4OmyrFC30)
-
----
 
 ## Contributing
 
