@@ -291,11 +291,11 @@ public class YourModuleName : ModuleRules
 The **Auto** module in this project was created using Rider:
 
 1. **Right-click on the project root directory** → Select `Add` → `Unreal Module…`
-   ![Image](https://github.com/user-attachments/assets/10e95f9c-beaa-4411-91bb-1e83cc3b4742)
+   <img width="100%" src="https://github.com/user-attachments/assets/10e95f9c-beaa-4411-91bb-1e83cc3b4742">
 2. **Enter module name**: `YourModuleName`
 3. **Select module type**: `Runtime`
 4. **Select loading phase**: `Default`
-   ![Image](https://github.com/user-attachments/assets/c89437c4-958e-41e6-8fda-9677864b11ae)
+   <img width="100%" src="https://github.com/user-attachments/assets/c89437c4-958e-41e6-8fda-9677864b11ae">
 5. **Click OK**, Rider automatically created:
 
 ```csharp
@@ -373,14 +373,14 @@ IMPLEMENT_MODULE(FAutoModule, Auto)
 ### Visual Studio
 
 1. **Right-click on the project root directory** → Select `Add` → `Unreal Module…`
-   ![Image](https://github.com/user-attachments/assets/7d719d07-8888-4c93-af5b-453c69e1e12b)
+   <img width="100%" src="https://github.com/user-attachments/assets/7d719d07-8888-4c93-af5b-453c69e1e12b">
 2. **Select Empty Unreal Engine Module**
 3. **Click Add**
-   ![Image](https://github.com/user-attachments/assets/6e388ca4-bc27-442b-a27d-96ebd4e3a9b4)
+   <img width="100%" src="https://github.com/user-attachments/assets/6e388ca4-bc27-442b-a27d-96ebd4e3a9b4">
 4. **Enter module name**: `YourModuleName`
 5. **Select module type**: `Runtime`
 6. **Select loading phase**: `Default`
-   ![Image](https://github.com/user-attachments/assets/750c4cd3-78c8-41cd-a476-38550d93a4a3)
+   <img width="100%" src="https://github.com/user-attachments/assets/750c4cd3-78c8-41cd-a476-38550d93a4a3">
 7. **Click OK**
 
 ## Module Dependencies
