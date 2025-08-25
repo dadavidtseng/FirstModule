@@ -1,10 +1,7 @@
-# FirstModule
+![Project Banner](https://private-user-images.githubusercontent.com/113273083/481421372-d6606a7e-7d46-4bf2-9e2e-06095006500a.svg?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTYwODA4MjcsIm5iZiI6MTc1NjA4MDUyNywicGF0aCI6Ii8xMTMyNzMwODMvNDgxNDIxMzcyLWQ2NjA2YTdlLTdkNDYtNGJmMi05ZTJlLTA2MDk1MDA2NTAwYS5zdmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODI1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyNVQwMDA4NDdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0xNTczODQ2NmNmMmE0YmZmMDg4YjQyNDVlYjk3MDY2YmUzODY4MzE2NjMxMDBhN2NkZGU3ODcyZDZjYjUwN2RlJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.0a-PmIjAE1tTAtv7svjHzUg6H5ksNuPUlkvK-BzZyw0)
 
-## A Complete Handbook to Creating and Managing UE5 Modules
-
-<!-- Banner Image Placeholder -->
-![Project Banner](./banner.png)
-<!-- You can add your project banner image here -->
+<div align="center">
+<h3 align="center">A Complete Handbook to Creating and Managing UE5 Modules</h3>
 
 ![C++](https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)
 ![Unreal Engine](https://img.shields.io/badge/Unreal%20Engine-0E1128?style=for-the-badge&logo=unrealengine&logoColor=white)
@@ -13,9 +10,12 @@
 ![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/Platform-Windows-0078D4?style=for-the-badge&logo=windows&logoColor=white)
 
+</div>
+
 ---
 
 ## Table of Contents
+
 1. [What is an Unreal Module](#what-is-an-unreal-module)
 2. [Module Structure Analysis](#module-structure-analysis)
 3. [Creating Modules Manually](#creating-modules-manually)
@@ -28,7 +28,8 @@
 
 ## What is an Unreal Module
 
-An Unreal Engine Module is the fundamental unit of code organization, similar to Libraries or Packages in other programming languages. Each module is an independent compilation unit with the following characteristics:
+An Unreal Engine Module is the fundamental unit of code organization, similar to Libraries or Packages in other
+programming languages. Each module is an independent compilation unit with the following characteristics:
 
 - **Encapsulation**: Groups related functionality together
 - **Reusability**: Can be shared across different projects
@@ -53,12 +54,15 @@ Source/
 
 ### Real Project Structure (FirstModule)
 
-> **📝 Important Note:** 
-> The module names **Auto** and **Manual** in this project are chosen purely to demonstrate two different methods of module creation:
+> **📝 Important Note:**
+> The module names **Auto** and **Manual** in this project are chosen purely to demonstrate two different methods of
+> module creation:
 > - **Auto**: Created using IDE (JetBrains Rider) with automatic generation
 > - **Manual**: Created manually with full control over the process
-> 
-> These names have **no special meaning** regarding module dependencies or functionality. The same principles apply to any module names (e.g., ModuleA/ModuleB, GameplayCore/UISystem, etc.). The dependency relationship (Manual depends on Auto) is simply for demonstration purposes and could easily be reversed or applied to any other module combination.
+>
+> These names have **no special meaning** regarding module dependencies or functionality. The same principles apply to
+> any module names (e.g., ModuleA/ModuleB, GameplayCore/UISystem, etc.). The dependency relationship (Manual depends on
+> Auto) is simply for demonstration purposes and could easily be reversed or applied to any other module combination.
 
 ```
 FirstModule/Source/
@@ -203,6 +207,7 @@ IMPLEMENT_MODULE(FManualModule, Manual)
 ### Step 5: Register Module to Project
 
 **FirstModule.uproject:**
+
 ```json
 {
   "FileVersion": 3,
@@ -228,6 +233,7 @@ IMPLEMENT_MODULE(FManualModule, Manual)
 ```
 
 **FirstModule.Target.cs:**
+
 ```csharp
 //----------------------------------------------------------------------------------------------------
 // FirstModule.Target.cs
@@ -286,11 +292,11 @@ public class YourModuleName : ModuleRules
 The **Auto** module in this project was created using Rider:
 
 1. **Right-click on the project root directory** → Select `Add` → `Unreal Module…`
-![](https://private-user-images.githubusercontent.com/113273083/481330624-714fb914-e4a0-448b-b3e9-19330ed68a54.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU5ODgyMzYsIm5iZiI6MTc1NTk4NzkzNiwicGF0aCI6Ii8xMTMyNzMwODMvNDgxMzMwNjI0LTcxNGZiOTE0LWU0YTAtNDQ4Yi1iM2U5LTE5MzMwZWQ2OGE1NC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyM1QyMjI1MzZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iNDhlNTBiMTZlNTVmYTAyYTRlZTFiNmVjNDJjZDJlNDgwMDFhNWExZjZiY2M3NzdkMGQ1ZjIzODMzZWE3ODU3JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.amD3ZvgzcQ3EVAH8tc4rofSR1zVocnUAdQPYterFK8k)
+   ![](https://private-user-images.githubusercontent.com/113273083/481330624-714fb914-e4a0-448b-b3e9-19330ed68a54.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU5ODgyMzYsIm5iZiI6MTc1NTk4NzkzNiwicGF0aCI6Ii8xMTMyNzMwODMvNDgxMzMwNjI0LTcxNGZiOTE0LWU0YTAtNDQ4Yi1iM2U5LTE5MzMwZWQ2OGE1NC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyM1QyMjI1MzZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1iNDhlNTBiMTZlNTVmYTAyYTRlZTFiNmVjNDJjZDJlNDgwMDFhNWExZjZiY2M3NzdkMGQ1ZjIzODMzZWE3ODU3JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.amD3ZvgzcQ3EVAH8tc4rofSR1zVocnUAdQPYterFK8k)
 2. **Enter module name**: `YourModuleName`
 3. **Select module type**: `Runtime`
 4. **Select loading phase**: `Default`
-![](https://private-user-images.githubusercontent.com/113273083/481330676-4dfec85f-2f43-424e-bdb7-a637657bfd01.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU5ODgzMDcsIm5iZiI6MTc1NTk4ODAwNywicGF0aCI6Ii8xMTMyNzMwODMvNDgxMzMwNjc2LTRkZmVjODVmLTJmNDMtNDI0ZS1iZGI3LWE2Mzc2NTdiZmQwMS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyM1QyMjI2NDdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1kZDgzNGRlNzVhZDFkZjM5YmY1MWJlOTMwODJmM2ExNTExMjYxNzBhODdkZTc1ODkwYzQ5MmM4NWNhNTU0NjExJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.esgyNhFVSI2r8mnYCBp8TvQko8UxP0tU4hyFtcJffiM)
+   ![](https://private-user-images.githubusercontent.com/113273083/481330676-4dfec85f-2f43-424e-bdb7-a637657bfd01.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU5ODgzMDcsIm5iZiI6MTc1NTk4ODAwNywicGF0aCI6Ii8xMTMyNzMwODMvNDgxMzMwNjc2LTRkZmVjODVmLTJmNDMtNDI0ZS1iZGI3LWE2Mzc2NTdiZmQwMS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyM1QyMjI2NDdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1kZDgzNGRlNzVhZDFkZjM5YmY1MWJlOTMwODJmM2ExNTExMjYxNzBhODdkZTc1ODkwYzQ5MmM4NWNhNTU0NjExJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.esgyNhFVSI2r8mnYCBp8TvQko8UxP0tU4hyFtcJffiM)
 5. **Click OK**, Rider automatically created:
 
 ```csharp
@@ -368,26 +374,28 @@ IMPLEMENT_MODULE(FAutoModule, Auto)
 ### Visual Studio
 
 1. **Right-click on the project root directory** → Select `Add` → `Unreal Module…`
-![](https://private-user-images.githubusercontent.com/113273083/481331230-02c9c659-de10-4203-bdb5-0e5f86e7bc6d.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU5ODkzMjksIm5iZiI6MTc1NTk4OTAyOSwicGF0aCI6Ii8xMTMyNzMwODMvNDgxMzMxMjMwLTAyYzljNjU5LWRlMTAtNDIwMy1iZGI1LTBlNWY4NmU3YmM2ZC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyM1QyMjQzNDlaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1mNWU1YzhkNzE0YTQzMWI4NDU1NWQxMGYzZmQ4NmRlNDg3NTYzYTdiZDgwOWYyYzU1NGE1OGZkZGZhZGJlZjJmJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.3rd8JLWSmrjDPe55Ryacz21FH0BA6f8y4Qga8kgMePA)
+   ![](https://private-user-images.githubusercontent.com/113273083/481331230-02c9c659-de10-4203-bdb5-0e5f86e7bc6d.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU5ODkzMjksIm5iZiI6MTc1NTk4OTAyOSwicGF0aCI6Ii8xMTMyNzMwODMvNDgxMzMxMjMwLTAyYzljNjU5LWRlMTAtNDIwMy1iZGI1LTBlNWY4NmU3YmM2ZC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyM1QyMjQzNDlaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1mNWU1YzhkNzE0YTQzMWI4NDU1NWQxMGYzZmQ4NmRlNDg3NTYzYTdiZDgwOWYyYzU1NGE1OGZkZGZhZGJlZjJmJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.3rd8JLWSmrjDPe55Ryacz21FH0BA6f8y4Qga8kgMePA)
 2. **Select Empty Unreal Engine Module**
 3. **Click Add**
-![](https://private-user-images.githubusercontent.com/113273083/481331276-c0adc6eb-558d-4794-9b42-d0ad07618658.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU5ODkzOTYsIm5iZiI6MTc1NTk4OTA5NiwicGF0aCI6Ii8xMTMyNzMwODMvNDgxMzMxMjc2LWMwYWRjNmViLTU1OGQtNDc5NC05YjQyLWQwYWQwNzYxODY1OC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyM1QyMjQ0NTZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1kZjI3NjZmMmNhMDg2MmRhM2MyNzVkOTUxMDUwYzUwZDgxN2UxNDYyN2E2NWVjOGQ1YWM4YzM0YWFiNzAyNGUzJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.rBeT-mZ-GojlMBB9vLUKoukVlhuRxeBEZZMY0hm1QsE)
+   ![](https://private-user-images.githubusercontent.com/113273083/481331276-c0adc6eb-558d-4794-9b42-d0ad07618658.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU5ODkzOTYsIm5iZiI6MTc1NTk4OTA5NiwicGF0aCI6Ii8xMTMyNzMwODMvNDgxMzMxMjc2LWMwYWRjNmViLTU1OGQtNDc5NC05YjQyLWQwYWQwNzYxODY1OC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyM1QyMjQ0NTZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1kZjI3NjZmMmNhMDg2MmRhM2MyNzVkOTUxMDUwYzUwZDgxN2UxNDYyN2E2NWVjOGQ1YWM4YzM0YWFiNzAyNGUzJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.rBeT-mZ-GojlMBB9vLUKoukVlhuRxeBEZZMY0hm1QsE)
 4. **Enter module name**: `YourModuleName`
 5. **Select module type**: `Runtime`
 6. **Select loading phase**: `Default`
-![](https://private-user-images.githubusercontent.com/113273083/481331304-5e94df61-989f-4eec-ae20-24780b34e215.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU5ODk0NjYsIm5iZiI6MTc1NTk4OTE2NiwicGF0aCI6Ii8xMTMyNzMwODMvNDgxMzMxMzA0LTVlOTRkZjYxLTk4OWYtNGVlYy1hZTIwLTI0NzgwYjM0ZTIxNS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyM1QyMjQ2MDZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0yMWZkOGNhMmFiYTcxMTdkNTQ4MzIwM2IxMWQzNGJiN2JjM2U1M2UyZmU1ZGVjNGFmM2I2M2RlNjRkMWUzNzJhJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.JvD0Zm--jxnnCUHUYq-ovL9iRJwMZUGQkZf0XCWk5Ok)
+   ![](https://private-user-images.githubusercontent.com/113273083/481331304-5e94df61-989f-4eec-ae20-24780b34e215.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTU5ODk0NjYsIm5iZiI6MTc1NTk4OTE2NiwicGF0aCI6Ii8xMTMyNzMwODMvNDgxMzMxMzA0LTVlOTRkZjYxLTk4OWYtNGVlYy1hZTIwLTI0NzgwYjM0ZTIxNS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwODIzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDgyM1QyMjQ2MDZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0yMWZkOGNhMmFiYTcxMTdkNTQ4MzIwM2IxMWQzNGJiN2JjM2U1M2UyZmU1ZGVjNGFmM2I2M2RlNjRkMWUzNzJhJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.JvD0Zm--jxnnCUHUYq-ovL9iRJwMZUGQkZf0XCWk5Ok)
 7. **Click OK**
 
 ## Module Dependencies
 
 > **📝 Naming Convention Note:**
-> In this project, "Manual depends on Auto" is purely for demonstration. The dependency direction has nothing to do with how the modules were created (manually vs IDE). In real projects, you might have:
+> In this project, "Manual depends on Auto" is purely for demonstration. The dependency direction has nothing to do with
+> how the modules were created (manually vs. IDE). In real projects, you might have:
 > - `GameplayCore` depends on `UtilityLibrary`
-> - `UISystem` depends on `GameplayCore` 
+> - `UISystem` depends on `GameplayCore`
 > - `AudioManager` depends on `ConfigurationModule`
 > - `PlayerController` depends on `InputManager`
-> 
-> The dependency direction and module names should reflect your actual project architecture, not the creation method. You could equally have:
+>
+> The dependency direction and module names should reflect your actual project architecture, not the creation method.
+> You could equally have:
 > - Auto depends on Manual
 > - ModuleA depends on ModuleB
 > - Any meaningful combination based on your project needs
@@ -395,6 +403,7 @@ IMPLEMENT_MODULE(FAutoModule, Auto)
 ### Manual Module Depends on Auto Module
 
 **Manual.Build.cs shows the dependency:**
+
 ```csharp
 PublicDependencyModuleNames.AddRange([
     "Core",
@@ -405,6 +414,7 @@ PublicDependencyModuleNames.AddRange([
 ### Using Classes from Other Modules
 
 **ManualExposed.h includes AutoCppOnly:**
+
 ```cpp
 //----------------------------------------------------------------------------------------------------
 // ManualExposed.h
@@ -432,6 +442,7 @@ public:
 ```
 
 **ManualExposed.cpp uses the Auto module class:**
+
 ```cpp
 //----------------------------------------------------------------------------------------------------
 // ManualExposed.cpp
@@ -464,8 +475,10 @@ void AManualExposed::DoManualExposed() const
 Based on this project's structure, here's the three-tier classification:
 
 #### ManualCppOnly (C++ Only Classes)
+
 **Purpose**: High-performance C++ API for other modules
 **Features**:
+
 - ✅ Other C++ modules can use
 - ❌ Blueprint cannot inherit/call
 - ⚡ High performance, no reflection system overhead
@@ -507,11 +520,13 @@ void FManualCppOnly::DoManualCppOnly()
 ```
 
 #### ManualExposed (Blueprint Compatible Classes)
+
 **Purpose**: Blueprint-compatible game logic
 **Features**:
+
 - ✅ Other C++ modules can use
 - ✅ Blueprint can inherit/call
-- 🔄 Can internally call other module's classes (like AutoCppOnly)
+- 🔄 Can internally call other modules' classes (like AutoCppOnly)
 
 ```cpp
 //----------------------------------------------------------------------------------------------------
@@ -540,8 +555,10 @@ public:
 ```
 
 #### ManualInternal (Internal Implementation)
+
 **Purpose**: Internal module implementation details
 **Features**:
+
 - ❌ Other modules cannot use (located in Private folder)
 - ❌ Blueprint cannot access
 - 🔒 Encapsulates implementation details
@@ -564,10 +581,10 @@ class FManualInternal
 ### 2. Naming Conventions
 
 - **Module Names**: Use PascalCase, e.g., `Auto`, `Manual`
-- **Class Names**: Use appropriate prefix:
-  - `F` for regular classes: `FManualCppOnly`
-  - `A` for Actors: `AManualExposed`
-  - `U` for UObject-derived: `UManualComponent`
+- **Class Names**: Use the appropriate prefix:
+    - `F` for regular classes: `FManualCppOnly`
+    - `A` for Actors: `AManualExposed`
+    - `U` for UObject-derived: `UManualComponent`
 - **API Macros**: Use uppercase module name: `MANUAL_API`, `AUTO_API`
 
 ### 3. Directory Organization
@@ -622,6 +639,7 @@ UE_LOG(LogManual, Warning, TEXT("FManualCppOnly::DoManualCppOnly()"));
 **Symptoms**: Game startup shows module not found
 
 **Solutions**:
+
 1. Check if .uproject file correctly registers the module
 2. Check if Target.cs files include the module name
 3. Confirm Build.cs file syntax is correct
@@ -632,9 +650,10 @@ UE_LOG(LogManual, Warning, TEXT("FManualCppOnly::DoManualCppOnly()"));
 **Symptoms**: Cannot find header files or linking errors
 
 **Solutions**:
+
 1. Check dependencies in Build.cs (like Manual depending on Auto)
 2. Confirm API macros are used correctly (`MANUAL_API`, `AUTO_API`)
-3. Check include paths
+3. Check #include paths
 4. Clean and rebuild
 
 ### Issue 3: Circular Dependencies
@@ -642,6 +661,7 @@ UE_LOG(LogManual, Warning, TEXT("FManualCppOnly::DoManualCppOnly()"));
 **Symptoms**: Module A depends on B, B also depends on A
 
 **Solutions**:
+
 1. Redesign module architecture
 2. Extract common dependencies to a third module
 3. Use forward declarations to reduce dependencies
@@ -652,6 +672,7 @@ UE_LOG(LogManual, Warning, TEXT("FManualCppOnly::DoManualCppOnly()"));
 **Symptoms**: C++ classes not visible in Blueprint
 
 **Solutions**:
+
 1. Ensure class inherits from UObject/AActor/UComponent
 2. Add UCLASS macro with BlueprintType, Blueprintable
 3. Use UFUNCTION for callable functions
@@ -659,6 +680,7 @@ UE_LOG(LogManual, Warning, TEXT("FManualCppOnly::DoManualCppOnly()"));
 5. Regenerate project files after changes
 
 **Example from ManualExposed (Working Blueprint Class):**
+
 ```cpp
 UCLASS(Blueprintable)  // Makes class available in Blueprint
 class MANUAL_API AManualExposed : public AActor
@@ -673,7 +695,7 @@ public:
 
 ### Issue 5: Constructor Called Multiple Times
 
-**Symptoms**: Constructor logs appear multiple times before game starts
+**Symptoms**: Constructor logs appear multiple times before the game starts
 
 ```
 LogManual: Warning: AManualExposed::AManualExposed()
@@ -682,12 +704,14 @@ LogManual: Warning: AManualExposed::AManualExposed()
 ```
 
 **This is normal behavior!** UE calls constructors for:
+
 1. **CDO (Class Default Object)** creation
 2. **Blueprint asset validation**
 3. **Editor preview systems**
 4. **Actor Factory systems**
 
 **Best Practices**:
+
 - Keep constructors lightweight (only set default values)
 - Put game logic in `BeginPlay()` instead
 - Use `IsTemplate()` to check if it's a CDO
@@ -714,30 +738,36 @@ void AManualExposed::BeginPlay()
 ## Core Module Macros Explained
 
 ### DEFINE_LOG_CATEGORY(LogManual)
+
 ```cpp
 // In ManualModule.cpp
 DEFINE_LOG_CATEGORY(LogManual);
 ```
+
 - **Purpose**: Creates a dedicated log category for the module
 - **Usage**: `UE_LOG(LogManual, Warning, TEXT("Message"));`
 - **Benefits**: Filter module-specific logs in editor
 
 ### LOCTEXT_NAMESPACE "FManualModule"
+
 ```cpp
 // In ManualModule.cpp
 #define LOCTEXT_NAMESPACE "FManualModule"
 // ... module code ...
 #undef LOCTEXT_NAMESPACE
 ```
+
 - **Purpose**: Sets namespace for localization text
 - **Usage**: `LOCTEXT("Key", "Default Text")`
 - **Benefits**: Supports game internationalization
 
 ### IMPLEMENT_MODULE(FManualModule, Manual)
+
 ```cpp
 // In ManualModule.cpp
 IMPLEMENT_MODULE(FManualModule, Manual)
 ```
+
 - **Purpose**: Registers module with UE system
 - **Format**: `IMPLEMENT_MODULE(ClassName, ModuleName)`
 - **Critical**: Without this, module won't load!
@@ -753,28 +783,30 @@ This handbook is based on the real **FirstModule** project, demonstrating:
 - **Blueprint Integration**: Real working examples of C++ to Blueprint exposure
 
 Through proper module design, you can:
+
 - Improve code maintainability
 - Facilitate team collaboration
 - Enable feature reuse
 - Optimize compilation time
 - Create clear separation between C++ and Blueprint functionality
 
-Remember, good module design is the foundation of successful UE projects. Start with small modules and gradually build your modular architecture.
+Remember, good module design is the foundation of successful UE projects. Start with small modules and gradually build
+your modular architecture.
 
 ---
 
 ## References
 
-
-1. [Unreal Engine Modules - Official Documentation](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-modules)
+1. [Unreal Engine Modules—Official Documentation](https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-modules)
 2. [Improving Code Structure with Unreal Engine's C++ Modules](https://dev.epicgames.com/community/learning/tutorials/xJ/improving-code-structure-with-unreal-engine-s-c-modules)
-3. [Getting into C++ with Unreal Engine - Part 7 - Modules & Plugins](https://www.youtube.com/watch?v=-r4OmyrFC30)
+3. [Getting into C++ with Unreal Engine—Part 7 - Modules & Plugins](https://www.youtube.com/watch?v=-r4OmyrFC30)
 
 ---
 
 ## Contributing
 
 Feel free to contribute to this handbook by:
+
 - 📝 Adding more examples
 - 🐛 Reporting issues or improvements
 - 💡 Suggesting new sections or topics
@@ -782,4 +814,5 @@ Feel free to contribute to this handbook by:
 
 ## License
 
-This handbook is provided under the Apache 2.0 License. Feel free to use, modify, and distribute it for educational purposes.
+This handbook is provided under the Apache 2.0 License. Feel free to use, modify, and distribute it for educational
+purposes.
