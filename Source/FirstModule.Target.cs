@@ -20,6 +20,6 @@ public class FirstModuleTarget : TargetRules
 
 	private void RegisterModulesCreatedByRider()
 	{
-		ExtraModuleNames.AddRange(["Auto", "Manual"]);
+		ExtraModuleNames.AddRange(["Auto", "Manual", "Migrate"]);
 	}
 }

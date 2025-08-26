@@ -19,11 +19,12 @@
 2. [Module Structure Analysis](#module-structure-analysis)
 3. [Creating Modules Manually](#creating-modules-manually)
 4. [Creating Modules with IDE](#creating-modules-with-ide)
-5. [Module Dependencies](#module-dependencies)
-6. [Best Practices](#best-practices)
-7. [Common Issues and Solutions](#common-issues-and-solutions)
-8. [References](#references)
-9. [Contributing](#contributing)
+5. [Migrating Modules](#migrating-modules)
+6. [Module Dependencies](#module-dependencies)
+7. [Best Practices](#best-practices)
+8. [Common Issues and Solutions](#common-issues-and-solutions)
+9. [References](#references)
+10. [Contributing](#contributing)
 
 ## What is an Unreal Module
 
@@ -89,6 +90,14 @@ FirstModule/Source/
 │       ├── ManualExposed.cpp
 │       ├── ManualInternal.cpp
 │       └── ManualInternal.h    # Internal implementation
+├── Migrate/                    # Migrated module (example)
+│   ├── Migrate.Build.cs
+│   ├── Public/
+│   │   ├── Migrate.h
+│   │   └── MigrateActor.h
+│   └── Private/
+│       ├── Migrate.cpp
+│       └── MigrateActor.cpp
 └── FirstModule/                # Main game module
     ├── FirstModule.Build.cs
     ├── FirstModule.cpp
@@ -382,6 +391,180 @@ IMPLEMENT_MODULE(FAutoModule, Auto)
 6. **Select loading phase**: `Default`
    <img width="100%" src="https://github.com/user-attachments/assets/750c4cd3-78c8-41cd-a476-38550d93a4a3">
 7. **Click OK**
+
+## Migrating Modules
+
+Sometimes you need to move or migrate an existing module from one project to another. This process involves copying the module files and updating the target project's configuration. The **Migrate** module in this project demonstrates how an external module can be integrated.
+
+> **📝 Migration Note:**
+> Module migration is useful when you want to:
+> - Share modules between different projects
+> - Move modules from an experimental project to production
+> - Reuse existing functionality in new projects
+> - Backup and restore specific modules
+
+### Step 1: Copy the Module Folder
+
+The first step is to copy the entire module folder from the source project:
+
+1. **Open File Explorer** and navigate to the source project's `Source/` directory
+2. **Locate the module** you want to migrate (in this case, it's the `Migrate` module)
+3. **Copy the entire module folder** including all subdirectories and files
+
+```
+SourceProject/Source/
+└── Migrate/                    # Copy this entire folder
+    ├── Migrate.Build.cs
+    ├── Public/
+    │   ├── Migrate.h
+    │   └── MigrateActor.h
+    └── Private/
+        ├── Migrate.cpp
+        └── MigrateActor.cpp
+```
+
+### Step 2: Paste to Target Project
+
+Paste the copied module folder to the target project:
+
+1. **Navigate to the target project's `Source/` directory**
+2. **Paste the module folder** at the same hierarchy level as existing modules like `Auto` and `Manual`
+
+```
+TargetProject/Source/
+├── Auto/                       # Existing module
+├── Manual/                     # Existing module
+├── Migrate/                    # ✅ Newly migrated module
+│   ├── Migrate.Build.cs
+│   ├── Public/
+│   │   ├── Migrate.h
+│   │   └── MigrateActor.h
+│   └── Private/
+│       ├── Migrate.cpp
+│       └── MigrateActor.cpp
+└── FirstModule/                # Main game module
+```
+
+### Step 3: Update Target Project Configuration
+
+After copying the files, you need to register the migrated module in the target project:
+
+#### Update .uproject File
+
+Add the new module to `FirstModule.uproject`:
+
+```json
+{
+  "FileVersion": 3,
+  "EngineAssociation": "5.6",
+  "Modules": [
+    {
+      "Name": "FirstModule",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    },
+    {
+      "Name": "Auto",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    },
+    {
+      "Name": "Manual",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    },
+    {
+      "Name": "Migrate",              // ✅ Add this entry
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ]
+}
+```
+
+#### Update Target.cs Files
+
+Add the module name to both `FirstModule.Target.cs` and `FirstModuleEditor.Target.cs`:
+
+**FirstModule.Target.cs:**
+```csharp
+private void RegisterModulesCreatedByRider()
+{
+    ExtraModuleNames.AddRange(["Auto", "Manual", "Migrate"]); // ✅ Add "Migrate"
+}
+```
+
+**FirstModuleEditor.Target.cs:**
+```csharp
+private void RegisterModulesCreatedByRider()
+{
+    ExtraModuleNames.AddRange(["Auto", "Manual", "Migrate"]); // ✅ Add "Migrate"
+}
+```
+
+### Step 4: Regenerate Project Files
+
+After updating the configuration files:
+
+1. **Close your IDE** (Rider/Visual Studio)
+2. **Right-click on `FirstModule.uproject`** → Select "Generate Visual Studio Project Files"
+3. **Wait for generation to complete**
+4. **Reopen the project** in your IDE
+
+### Step 5: Verify Migration
+
+To confirm the migration was successful:
+
+1. **Check that the module compiles** without errors
+2. **Verify module loading** in the UE Editor logs:
+   ```
+   LogTemp: Warning: MigrateActor::AMigrateActor
+   ```
+3. **Test module functionality** by using its classes in other modules or Blueprints
+
+### Migration Best Practices
+
+#### ✅ Do:
+- **Keep module self-contained**: Ensure the module doesn't have hard-coded dependencies on the source project
+- **Update dependencies carefully**: Check if the target project has all required dependencies
+- **Test thoroughly**: Verify all functionality works in the new environment
+- **Maintain API consistency**: Keep public interfaces stable for easier migration
+
+#### ❌ Don't:
+- **Copy system-specific files**: Don't migrate `Intermediate/` or `Binaries/` folders
+- **Ignore dependencies**: Make sure all required modules exist in the target project
+- **Skip regeneration**: Always regenerate project files after migration
+- **Assume compatibility**: Different UE versions might require code adjustments
+
+### Common Migration Issues
+
+#### Issue 1: Missing Dependencies
+**Symptoms**: Compilation errors about missing includes or undefined classes
+**Solution**: Ensure all dependency modules exist in the target project or update `Build.cs`
+
+#### Issue 2: API Mismatch
+**Symptoms**: Linker errors or undefined symbols
+**Solution**: Verify the `MIGRATE_API` macro is correctly defined and used
+
+#### Issue 3: Module Not Loading
+**Symptoms**: Module doesn't appear in the modules list
+**Solution**: Double-check `.uproject` and `Target.cs` entries, then regenerate project files
+
+### Advanced Migration Scenarios
+
+#### Cross-Version Migration
+When migrating between different UE versions:
+1. **Check API changes** in the UE documentation
+2. **Update deprecated functions** to their modern equivalents
+3. **Verify Build.cs compatibility** with the target UE version
+
+#### Dependency Chain Migration
+When migrating a module that depends on other custom modules:
+1. **Migrate dependencies first** in the correct order
+2. **Update Build.cs dependencies** to match the target project structure
+3. **Test the entire dependency chain** after migration
+
+Module migration is a powerful feature that enables code reuse across projects and helps maintain a modular architecture. The **Migrate** module in this project serves as a practical example of how external modules can be seamlessly integrated into existing projects.
 
 ## Module Dependencies
 
