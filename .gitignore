@@ -5,6 +5,8 @@
 .vsconfig
 *.sln.DotSettings.user
 *.user
+.claude/
+.spec-workflow/
 
 # Compiled Object files
 *.slo
